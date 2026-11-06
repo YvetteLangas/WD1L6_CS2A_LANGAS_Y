@@ -1,0 +1,111 @@
+
+
+/* ---------- 1. Design tokens ---------- */
+:root {
+  --ink:    #0f2a2a;   /* deep teal-black: dark sections */
+  --ink-2:  #17403f;   /* raised surfaces on dark */
+  --paper:  #f4f1ea;   /* light sections */
+  --brass:  #c9a24b;   /* single accent */
+  --text:   #2b3a3a;   /* body text on light */
+  --mute:   #5d6c6b;   /* secondary text */
+  --on-ink: #e7efee;   /* text on dark */
+  --font-head: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+
+/* ---------- 2. Base ---------- */
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); color: var(--text); background: var(--paper); }
+h1, h2, h3, h4, .brand { font-family: var(--font-head); }
+a:focus-visible, button:focus-visible, .form-control:focus-visible {
+  outline: 3px solid var(--brass); outline-offset: 2px;
+}
+
+/* ---------- 3. Sections (shared rhythm) ---------- */
+.section { padding: 6rem 0; scroll-margin-top: 70px; }
+.section-light { background: var(--paper); }
+.section-dark  { background: var(--ink); color: var(--on-ink); }
+.section-heading { font-weight: 700; font-size: clamp(2rem, 4vw, 2.9rem); line-height: 1.15; }
+.section-dark .section-heading { color: #fff; }
+.lead-text { font-size: 1.08rem; line-height: 1.75; max-width: 62ch; }
+.section-dark .lead-text { color: #b9cccb; margin-inline: auto; }
+
+/* ---------- 4. Navbar ---------- */
+.site-nav { background: transparent; transition: background .3s, box-shadow .3s; padding: 1rem 0; }
+.site-nav.scrolled { background: var(--ink); box-shadow: 0 2px 14px rgba(0,0,0,.35); padding: .6rem 0; }
+.brand { font-weight: 700; font-size: 1.35rem; }
+.site-nav .nav-link { color: var(--on-ink); font-size: .92rem; letter-spacing: .02em; }
+.site-nav .nav-link:hover { color: #fff; }
+.site-nav .nav-link.active { color: var(--brass); }  /* ScrollSpy sets .active */
+@media (max-width: 767.98px) { .site-nav { background: var(--ink); } }
+
+/* ---------- 5. Hero (the one memorable moment) ---------- */
+.hero {
+  min-height: 100vh; position: relative; color: #fff;
+  background:
+    radial-gradient(60rem 30rem at 85% 10%, rgba(201,162,75,.18), transparent 60%),
+    linear-gradient(160deg, var(--ink) 40%, var(--ink-2));
+}
+.hero-kicker { color: var(--brass); font-size: 1rem; }
+.hero-title { font-size: clamp(2.8rem, 8vw, 6rem); font-weight: 700; line-height: 1.02; }
+.hero-title em { font-weight: 500; color: var(--brass); }
+.hero-sub { color: #b9cccb; font-size: 1.15rem; line-height: 1.7; }
+/* Page-load sequence: lines rise in one after another */
+.hero-kicker, .hero-title, .hero-sub, .hero .btn { animation: rise .8s both; }
+.hero-title { animation-delay: .15s; } .hero-sub { animation-delay: .3s; } .hero .btn { animation-delay: .45s; }
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+.scroll-hint { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); color: var(--brass); font-size: 1.6rem; }
+
+/* ---------- 6. Buttons ---------- */
+.btn-gold { background: var(--brass); color: var(--ink); font-weight: 600; border: 0; }
+.btn-gold:hover { background: #dbb764; color: var(--ink); }
+
+/* ---------- 7. About ---------- */
+.profile-photo {
+  width: min(100%, 300px); aspect-ratio: 1; object-fit: cover; border-radius: 50%;
+  border: 6px solid var(--brass); box-shadow: 0 0 0 10px rgba(201,162,75,.18);
+}
+.motto {
+  font-family: var(--font-head); font-style: italic; font-size: 1.4rem;
+  border-left: 4px solid var(--brass); padding-left: 1rem; margin: 1.5rem 0;
+}
+.facts li { display: flex; gap: .75rem; align-items: center; margin-bottom: .6rem; color: var(--mute); }
+.facts i { color: #9a7a2c; }
+
+/* ---------- 8. Philosophy cards ---------- */
+.philo-card {
+  height: 100%; padding: 1.75rem; border-radius: .5rem;
+  background: var(--ink-2); border: 1px solid rgba(201,162,75,.25);
+}
+.philo-card i { font-size: 1.7rem; color: var(--brass); }
+.philo-card h3 { font-size: 1.2rem; margin: 1rem 0 .5rem; color: #fff; }
+.philo-card p { color: #b9cccb; font-size: .95rem; margin: 0; }
+
+/* ---------- 9. Project cards ---------- */
+.project-card { border: 0; border-radius: .5rem; overflow: hidden; box-shadow: 0 6px 24px rgba(15,42,42,.12); height: 100%; }
+.project-card .carousel-item img { aspect-ratio: 16 / 10; object-fit: cover; width: 100%; }
+.project-card .badge-label { background: var(--ink); color: #fff; font-weight: 500; }
+.tech-chip { background: #e8e2d2; color: var(--ink); font-size: .78rem; font-weight: 500; padding: .2rem .6rem; border-radius: 1rem; }
+.filter-btn { border: 1px solid var(--ink); color: var(--ink); background: transparent; }
+.filter-btn.active, .filter-btn:hover { background: var(--ink); color: #fff; }
+
+/* ---------- 10. Contact ---------- */
+.contact-list li { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
+.contact-list .icon-ring {
+  width: 2.8rem; height: 2.8rem; border-radius: 50%; display: grid; place-items: center;
+  border: 1px solid var(--brass); color: var(--brass); flex: none;
+}
+.contact-list a { color: var(--on-ink); text-decoration: none; }
+.contact-list a:hover { color: var(--brass); }
+.section-dark .form-label { color: #b9cccb; font-size: .85rem; }
+.section-dark .form-control { background: var(--ink-2); border: 1px solid rgba(255,255,255,.12); color: #fff; }
+.section-dark .form-control:focus { border-color: var(--brass); box-shadow: none; }
+
+/* ---------- 11. Footer ---------- */
+.site-footer { background: #0a1c1c; color: #9db3b2; }
+
+/* ---------- 12. Respect reduced-motion preference ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+}
